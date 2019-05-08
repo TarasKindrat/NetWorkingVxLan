@@ -33,7 +33,6 @@ servers=[
 
 Vagrant.configure(2) do |config|
     servers.each do |machine|
-#config.vm.provider "virtualbox" do
         config.vm.define machine[:hostname] do |node|
             node.vm.box = machine[:box]
             node.vm.hostname = machine[:hostname]
@@ -44,5 +43,4 @@ Vagrant.configure(2) do |config|
             end
         end
     end
-  #end
-end
+  end
