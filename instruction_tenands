@@ -1,5 +1,6 @@
-                                                  # Debian 9 
-# Machine_1
+#                                                   Debian 9
+
+#                                                   Node1
 # real server IP 192.168.77.230
 # Add virtualbox repolist
 #echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" >> /etc/apt/sources.list 
@@ -45,7 +46,7 @@ ovs-vsctl add-port tenantB vxlanB -- set interface vxlanB type=vxlan options:rem
 
 
 
-# Machine_2
+#                                                      Node2
 # real server IP 192.168.77.231
 # Add virtualbox repolist
 #echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" | tee /etc/apt/sources.list.d/virtualbox.list
