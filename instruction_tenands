@@ -9,7 +9,6 @@
 #echo "deb-src http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list 
 
 # install virtualbox and vagrant
-
 apt-get update && sudo apt-get upgrade
 apt-get install build-essential linux-headers-`uname -r` virtualbox
 apt-get -t stretch-backports install vagrant
@@ -24,13 +23,11 @@ ip link set vmA1-sw up
 ip link set vmA1 up
 ip addr add 10.10.60.11/24 dev vmA1
 
-
 # create and configure the second vmB1 interface
 ip link add dev vmB1-sw type veth peer name vmB1
 ip link set vmB1-sw up
 ip link set vmB1 up
 ip addr add 10.10.70.11/24 dev vmB1
-
 
 # create tenantA and tenantB bridges, they represent the virtual switches
 ovs-vsctl add-br tenantA 
@@ -56,7 +53,6 @@ ovs-vsctl add-port tenantB vxlanB -- set interface vxlanB type=vxlan options:rem
 #echo "deb-src http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list 
 
 # install virtualbox and vagrant
-
 apt-get update && sudo apt-get upgrade
 apt-get install build-essential linux-headers-`uname -r` virtualbox
 apt-get -t stretch-backports install vagrant
@@ -77,13 +73,14 @@ ip link set vmB2-sw up
 ip link set vmB2 up
 ip addr add 10.10.70.12/24 dev vmB2
 
-
 # create tenantA and tenantB bridges, they represent the virtual switches
 ovs-vsctl add-br tenantA
 ovs-vsctl add-br tenantB
+
 # plugin the simulated interfaces to the bridges
 ovs-vsctl add-port tenantA vmA2-sw
 ovs-vsctl add-port tenantB vmB2-sw
 
+# create VXLAN tunnels between  VMs
 ovs-vsctl add-port tenantA vxlanA -- set interface vxlanA type=vxlan options:remote_ip=192.168.77.230 options:key=5000
 ovs-vsctl add-port tenantB vxlanB -- set interface vxlanB type=vxlan options:remote_ip=192.168.77.230 options:key=6000
